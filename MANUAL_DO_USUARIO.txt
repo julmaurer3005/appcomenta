@@ -16,6 +16,7 @@ PASSO A PASSO PARA USAR:
 2. CONFIGURAR O SORTEIO:
    - Link do Post: Cole o link da publicação do sorteio do Instagram.
    - Lista de Usuários: Clique em "📁 Escolher..." para selecionar o arquivo .txt com os nomes dos amigos (ou mantenha o padrão "usuarios.txt").
+     * DICA: Para extrair automaticamente seus seguidores reais e filtrar lojas/empresas, veja as instruções na pasta "extrair" (arquivo COMO_BAIXAR_SEGUIDORES.md).
    - Amigos por Comentário: Escolha quantos amigos marcar em cada comentário (ex: 1, 2 ou 3).
 
 3. INICIAR:

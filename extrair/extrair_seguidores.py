@@ -18,8 +18,10 @@ if sys.platform == "win32":
     except Exception:
         pass
 
-ARQUIVO_JSON = "seguidores.json"
-ARQUIVO_SAIDA = "seguidores.txt"
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+ARQUIVO_JSON = os.path.join(SCRIPT_DIR, "seguidores.json")
+ARQUIVO_SAIDA = os.path.join(SCRIPT_DIR, "seguidores.txt")
+ARQUIVO_USUARIOS_RAIZ = os.path.join(os.path.dirname(SCRIPT_DIR), "usuarios.txt")
 
 # Padrões precisos de empresas, lojas, marcas, serviços e páginas comerciais
 BUSINESS_PATTERNS = [
@@ -128,17 +130,36 @@ def main():
     print("   📥 EXTRATOR E HIGIENIZADOR DE SEGUIDORES DO INSTAGRAM 📥")
     print("=" * 65)
 
-    # Identificar arquivo JSON
-    caminho = ARQUIVO_JSON
-    if not os.path.exists(caminho):
-        # Tenta procurar qualquer arquivo .json na pasta
-        arquivos_json = [f for f in os.listdir(".") if f.endswith(".json")]
-        if arquivos_json:
-            caminho = arquivos_json[0]
-            print(f"ℹ️ Usando arquivo encontrado: {caminho}")
-        else:
-            print(f"❌ Erro: Arquivo '{ARQUIVO_JSON}' não foi encontrado na pasta.")
-            return
+    # Identificar arquivo JSON na pasta do script ou atual
+    caminho = None
+    candidatos_diretos = [
+        ARQUIVO_JSON,
+        os.path.join(SCRIPT_DIR, "followers_1.json"),
+        os.path.join(SCRIPT_DIR, "followers.json"),
+        os.path.join(SCRIPT_DIR, "following.json"),
+        "seguidores.json",
+        "followers_1.json"
+    ]
+    for c in candidatos_diretos:
+        if os.path.exists(c) and os.path.getsize(c) > 10:
+            caminho = c
+            break
+
+    if not caminho:
+        # Procura arquivos .json na pasta extrair/
+        jsons_na_pasta = [os.path.join(SCRIPT_DIR, f) for f in os.listdir(SCRIPT_DIR) if f.endswith(".json") and os.path.getsize(os.path.join(SCRIPT_DIR, f)) > 10]
+        if jsons_na_pasta:
+            caminho = jsons_na_pasta[0]
+
+    if not caminho:
+        print("❌ Nenhum arquivo JSON com seguidores encontrado na pasta 'extrair/'.")
+        print("\n📖 COMO OBTER O ARQUIVO:")
+        print("  1. Baixe suas informações no Instagram em formato JSON (veja COMO_BAIXAR_SEGUIDORES.md).")
+        print("  2. Coloque o arquivo 'followers_1.json' (ou 'seguidores.json') nesta pasta 'extrair/'.")
+        print("  3. Execute este script novamente.")
+        return
+
+    print(f"ℹ️ Usando arquivo: {os.path.basename(caminho)}")
 
     print(f"\n1. Lendo e extraindo dados de '{caminho}'...")
     todos_usuarios = extrair_usuarios_do_json(caminho)
@@ -181,6 +202,15 @@ def main():
         for user in limpos:
             f_out.write(f"{user}\n")
 
+    # Também atualiza/cria o usuarios.txt na raiz do projeto para facilidade do usuário
+    try:
+        with open(ARQUIVO_USUARIOS_RAIZ, "w", encoding="utf-8") as f_raiz:
+            for user in limpos:
+                f_raiz.write(f"{user}\n")
+        copiado_raiz = True
+    except Exception:
+        copiado_raiz = False
+
     print("\n" + "=" * 65)
     print("📊 RESULTADO FINAL:")
     print(f"  • Total bruto extraído:          {len(todos_usuarios)}")
@@ -196,8 +226,10 @@ def main():
         if len(empresas) > 15:
             print(f"  ... e mais {len(empresas) - 15} contas comerciais.")
 
-    print(f"\n✅ Arquivo '{ARQUIVO_SAIDA}' gerado com sucesso com {len(limpos)} seguidores limpos!")
+    print(f"\n✅ Arquivo '{os.path.basename(ARQUIVO_SAIDA)}' gerado com sucesso em 'extrair/' com {len(limpos)} seguidores!")
+    if copiado_raiz:
+        print(f"✅ Arquivo 'usuarios.txt' na raiz do projeto também foi atualizado automaticamente e está pronto para uso no Bot!")
 
 
 if __name__ == "__main__":
-    main()
+    main()
