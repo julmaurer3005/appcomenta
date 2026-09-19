@@ -19,9 +19,15 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: ⚙️ Configurar Gradle 8.6
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.6'
+
       - name: 🛠️ Compilar APK de Acessibilidade com Gradle
         working-directory: app_android_acessibilidade
         run: |
+          gradle --version
           gradle assembleDebug --no-daemon
 
       - name: 🚀 Salvar APK para Download
