@@ -132,8 +132,12 @@ public class InstagramAccessibilityService extends AccessibilityService {
 
             // Fallbacks de envio caso o botão do layout do Instagram use evento customizado
             if (!sent && newCommentBox != null) {
-                // 1. Tenta acionar a ação de envio do teclado (IME Action)
-                sent = newCommentBox.performAction(AccessibilityNodeInfo.ACTION_IME_ACTION);
+                // 1. Tenta acionar a ação Enter do teclado (IME) no Android 11+ (API 30+)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    try {
+                        sent = newCommentBox.performAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_IME_ENTER.getId());
+                    } catch (Exception ignored) {}
+                }
 
                 // 2. Tenta clique por coordenadas no canto direito do campo (botão publicar/enviar)
                 if (!sent) {
