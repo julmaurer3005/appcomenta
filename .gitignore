@@ -22,3 +22,11 @@ erro_*.png
 # VS Code / IDE
 .vscode/
 .idea/
+
+# Android & Gradle
+.gradle/
+**/build/
+**/.gradle/
+*.apk
+*.aab
+
