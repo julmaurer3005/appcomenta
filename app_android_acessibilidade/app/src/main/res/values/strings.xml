@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">InstaSorteio Auto</string>
+    <string name="accessibility_service_description">Permite que o InstaSorteio Auto digite comentários automaticamente com pausas humanas dentro do aplicativo oficial do Instagram para sorteios.</string>
+</resources>

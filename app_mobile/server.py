@@ -242,9 +242,21 @@ def run_bot_worker(config):
                 SESSION_DIR,
                 headless=headless_mode,
                 viewport={"width": 1280, "height": 800},
+                args=["--disable-blink-features=AutomationControlled", "--start-maximized"],
                 user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
                 locale="pt-BR"
             )
+
+            # Camuflagem Ultra Stealth
+            context.add_init_script("""
+            (() => {
+                Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+                window.chrome = { runtime: {}, loadTimes: function() {}, csi: function() {}, app: {} };
+                Object.defineProperty(navigator, 'plugins', { get: () => [1, 2, 3, 4, 5] });
+                Object.defineProperty(navigator, 'languages', { get: () => ['pt-BR', 'pt', 'en-US', 'en'] });
+            })();
+            """)
+
             page = context.pages[0] if context.pages else context.new_page()
 
             url_post = config.get("url_post", "").strip()

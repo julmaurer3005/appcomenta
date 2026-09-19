@@ -456,6 +456,7 @@ def run_bot():
     print(Fore.WHITE + f"  • Comentários pendentes para esta execução: {Fore.GREEN}{len(pending_chunks)}")
     print(Fore.WHITE + f"  • Post alvo: {Fore.CYAN}{config['url_post']}")
     print(Fore.WHITE + f"  • Intervalo seguro: {Fore.CYAN}{config.get('delay_min_segundos', 45)}s a {config.get('delay_max_segundos', 85)}s")
+    print(Fore.WHITE + f"  • Camuflagem Ultra Stealth: {Fore.GREEN}Ativada (Anti-Detecção)")
     print("-" * 60)
 
     if not pending_chunks:
@@ -470,7 +471,7 @@ def run_bot():
     os.makedirs(SESSION_DIR, exist_ok=True)
 
     with sync_playwright() as p:
-        print(Fore.BLUE + "\n🌐 Iniciando navegador...")
+        print(Fore.BLUE + "\n🌐 Iniciando navegador com Camuflagem Ultra Stealth...")
         browser_context = p.chromium.launch_persistent_context(
             user_data_dir=os.path.abspath(SESSION_DIR),
             headless=False,
@@ -482,6 +483,8 @@ def run_bot():
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
             locale="pt-BR"
         )
+
+        apply_stealth_evasions(browser_context)
 
         page = browser_context.pages[0] if browser_context.pages else browser_context.new_page()
 

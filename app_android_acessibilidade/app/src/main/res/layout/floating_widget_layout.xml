@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/floatingRoot"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/floating_bg"
+    android:padding="12dp"
+    android:elevation="12dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="6dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🤖"
+            android:textSize="18sp"
+            android:layout_marginEnd="6dp" />
+
+        <TextView
+            android:id="@+id/tvFloatingStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="InstaSorteio: Pronto"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/btnFloatingClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" ✕ "
+            android:textColor="#94A3B8"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:padding="2dp"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvFloatingProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Comentário: 0/0"
+        android:textColor="#38BDF8"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btnFloatingStart"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="▶ INICIAR"
+            android:backgroundTint="#10B981"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:layout_marginEnd="4dp" />
+
+        <Button
+            android:id="@+id/btnFloatingStop"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="⏹ PAUSAR"
+            android:backgroundTint="#EF4444"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:enabled="false" />
+    </LinearLayout>
+</LinearLayout>

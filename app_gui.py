@@ -585,6 +585,16 @@ class InstagramBotGUI:
                     locale="pt-BR"
                 )
 
+                # Camuflagem Ultra Stealth (Anti-Detecção)
+                browser_context.add_init_script("""
+                (() => {
+                    Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+                    window.chrome = { runtime: {}, loadTimes: function() {}, csi: function() {}, app: {} };
+                    Object.defineProperty(navigator, 'plugins', { get: () => [1, 2, 3, 4, 5] });
+                    Object.defineProperty(navigator, 'languages', { get: () => ['pt-BR', 'pt', 'en-US', 'en'] });
+                })();
+                """)
+
                 page = browser_context.pages[0] if browser_context.pages else browser_context.new_page()
 
                 # 1. Login
