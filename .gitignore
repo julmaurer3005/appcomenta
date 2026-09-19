@@ -29,7 +29,7 @@ erro_*.png
 **/.gradle/
 *.apk
 *.aab
-usuarios.txt
-historico_comentarios.txt
-seguidores.json
-seguidores.txt
+.usuarios
+.historico_comentarios
+.seguidores
+.seguidores
