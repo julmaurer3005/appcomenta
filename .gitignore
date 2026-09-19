@@ -29,7 +29,12 @@ erro_*.png
 **/.gradle/
 *.apk
 *.aab
-.usuarios
-.historico_comentarios
-.seguidores
-.seguidores
+# Dados de usuários, seguidores e histórico
+usuarios.txt
+historico_comentarios.txt
+seguidores.txt
+seguidores.json
+followers*.json
+extrair/seguidores.txt
+extrair/seguidores.json
+*.jsonl
