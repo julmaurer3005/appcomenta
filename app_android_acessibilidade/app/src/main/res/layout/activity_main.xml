@@ -244,7 +244,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:layout_marginBottom="10dp">
+                    android:layout_marginBottom="8dp">
 
                     <TextView
                         android:layout_width="0dp"
@@ -260,6 +260,62 @@
                         android:layout_height="wrap_content"
                         android:inputType="number"
                         android:text="85"
+                        android:textAlignment="center"
+                        android:textColor="@color/text_white"
+                        android:background="#0b1120"
+                        android:padding="6dp" />
+                </LinearLayout>
+
+                <!-- Comentários por Lote -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Pausa longa a cada (comentários):"
+                        android:textColor="@color/text_dim"
+                        android:textSize="13sp" />
+
+                    <EditText
+                        android:id="@+id/etBatchSize"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="5"
+                        android:textAlignment="center"
+                        android:textColor="@color/text_white"
+                        android:background="#0b1120"
+                        android:padding="6dp" />
+                </LinearLayout>
+
+                <!-- Duração da Pausa do Lote -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Tempo da Pausa Longa (segundos):"
+                        android:textColor="@color/text_dim"
+                        android:textSize="13sp" />
+
+                    <EditText
+                        android:id="@+id/etBatchPause"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:text="300"
                         android:textAlignment="center"
                         android:textColor="@color/text_white"
                         android:background="#0b1120"

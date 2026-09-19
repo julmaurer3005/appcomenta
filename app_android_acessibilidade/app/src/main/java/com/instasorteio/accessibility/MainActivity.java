@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView tvAccessibilityStatus, tvUserCount;
     private Button btnEnableAccessibility, btnImportFile, btnStartOverlay;
-    private EditText etUserList, etChunkSize, etDelayMin, etDelayMax;
+    private EditText etUserList, etChunkSize, etDelayMin, etDelayMax, etBatchSize, etBatchPause;
     private CheckBox cbPhrases, cbEmojis;
 
     @Override
@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         etChunkSize = findViewById(R.id.etChunkSize);
         etDelayMin = findViewById(R.id.etDelayMin);
         etDelayMax = findViewById(R.id.etDelayMax);
+        etBatchSize = findViewById(R.id.etBatchSize);
+        etBatchPause = findViewById(R.id.etBatchPause);
         cbPhrases = findViewById(R.id.cbPhrases);
         cbEmojis = findViewById(R.id.cbEmojis);
 
@@ -183,6 +185,8 @@ public class MainActivity extends AppCompatActivity {
             cfg.chunkSize = Integer.parseInt(etChunkSize.getText().toString().trim());
             cfg.delayMin = Integer.parseInt(etDelayMin.getText().toString().trim());
             cfg.delayMax = Integer.parseInt(etDelayMax.getText().toString().trim());
+            cfg.batchSize = Integer.parseInt(etBatchSize.getText().toString().trim());
+            cfg.batchPause = Integer.parseInt(etBatchPause.getText().toString().trim());
         } catch (Exception e) {}
         cfg.usePhrases = cbPhrases.isChecked();
         cfg.useEmojis = cbEmojis.isChecked();
