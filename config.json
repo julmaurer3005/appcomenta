@@ -1,0 +1,40 @@
+{
+  "url_post": "https://www.instagram.com/p/DclYLt2uFZx/",
+  "usuarios_por_comentario": 3,
+  "delay_min_segundos": 81,
+  "delay_max_segundos": 156,
+  "comentarios_por_lote": 3,
+  "pausa_lote_segundos": 348,
+  "limite_maximo_comentarios": 0,
+  "adicionar_frase_aleatoria": true,
+  "frases": [
+    "Boa sorte!",
+    "Tomara que eu ganhe!",
+    "Sorteia eu!",
+    "Dedos cruzados!",
+    "Tô na torcida!",
+    "Já é meu!",
+    "Quero muito ganhar!",
+    "Vem sorte!",
+    "Na torcida aqui!",
+    "Bora ganhar!",
+    "Agora vai!",
+    "Fé no prêmio!",
+    "Se Deus quiser!",
+    "Confiante!",
+    "Essa vitória é nossa!"
+  ],
+  "adicionar_emoji_aleatorio": true,
+  "emojis": [
+    "🍀",
+    "🤞",
+    "✨",
+    "🔥",
+    "🙌",
+    "🎯",
+    "⭐",
+    "🎉"
+  ],
+  "arquivo_usuarios": "usuarios.txt",
+  "modo_visivel": true
+}

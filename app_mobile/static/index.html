@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>InstaSorteio - Bot de Comentários</title>
+  
+  <!-- PWA & Mobile Meta Tags -->
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="InstaSorteio">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/svg+xml" href="/static/icon.svg">
+  <link rel="apple-touch-icon" href="/static/icon.svg">
+
+  <!-- Google Fonts Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <!-- App Wrapper -->
+  <div class="app-container">
+    
+    <!-- Top Header -->
+    <header class="app-header">
+      <div class="header-brand">
+        <div class="brand-icon">
+          <span>🤖</span>
+        </div>
+        <div>
+          <h1 class="brand-title">InstaSorteio</h1>
+          <p class="brand-subtitle">Bot de Comentários Mobile</p>
+        </div>
+      </div>
+      <div class="status-badge" id="statusBadge">
+        <span class="status-dot"></span>
+        <span id="statusBadgeText">Pronto</span>
+      </div>
+    </header>
+
+    <!-- PWA Install Banner -->
+    <div class="install-card" id="installBanner" style="display: none;">
+      <div class="install-info">
+        <span class="install-icon">📲</span>
+        <div>
+          <h4>Instalar Aplicativo</h4>
+          <p>Adicione à tela inicial para acesso rápido!</p>
+        </div>
+      </div>
+      <button class="btn-install" id="btnInstallApp">Instalar</button>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+      <button class="tab-btn active" data-tab="tab-control">
+        <span class="tab-icon">🎯</span>
+        <span>Sorteio</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-safety">
+        <span class="tab-icon">🛡️</span>
+        <span>Anti-Ban</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-users">
+        <span class="tab-icon">👥</span>
+        <span>Lista @</span>
+      </button>
+      <button class="tab-btn" data-tab="tab-logs">
+        <span class="tab-icon">📜</span>
+        <span>Logs</span>
+      </button>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="app-main">
+
+      <!-- TAB 1: Sorteio (Principal) -->
+      <section class="tab-content active" id="tab-control">
+        
+        <!-- Post URL Card -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">🔗 Link do Post do Sorteio</span>
+          </div>
+          <div class="input-action-group">
+            <input type="url" id="postUrlInput" class="form-input" placeholder="https://www.instagram.com/p/..." autocomplete="off">
+            <button class="btn-action-sm" id="btnPasteUrl" title="Colar link">
+              📋 Colar
+            </button>
+          </div>
+        </div>
+
+        <!-- Chunk & Options Card -->
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">👥 Amigos por Comentário</span>
+          </div>
+          <div class="counter-row">
+            <div class="counter-info">
+              <span class="counter-desc">Quantas pessoas marcar em cada comentário:</span>
+            </div>
+            <div class="counter-control">
+              <button class="counter-btn" id="btnDecChunk">-</button>
+              <span class="counter-val" id="chunkVal">3</span>
+              <button class="counter-btn" id="btnIncChunk">+</button>
+            </div>
+          </div>
+          <div class="calc-badge" id="calcSummary">
+            Calculando comentários...
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-grid">
+          <button class="btn-start" id="btnStartBot">
+            <span class="btn-icon">▶</span>
+            <span>INICIAR BOT</span>
+          </button>
+          <button class="btn-stop" id="btnStopBot" disabled>
+            <span class="btn-icon">⏹</span>
+            <span>PARAR</span>
+          </button>
+        </div>
+
+        <!-- Live Progress Card -->
+        <div class="card progress-card" id="progressCard">
+          <div class="progress-top">
+            <span class="progress-label" id="liveStatusText">Status: Pronto para iniciar</span>
+            <span class="progress-percent" id="livePercentText">0%</span>
+          </div>
+
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+          </div>
+
+          <!-- Current typing preview -->
+          <div class="comment-preview" id="commentPreview" style="display: none;">
+            <span class="preview-label">Último Comentário:</span>
+            <p class="preview-text" id="previewText">-</p>
+          </div>
+
+          <!-- Metrics Box -->
+          <div class="metrics-grid">
+            <div class="metric-box success">
+              <span class="metric-num" id="metricPosted">0</span>
+              <span class="metric-name">Enviados</span>
+            </div>
+            <div class="metric-box danger">
+              <span class="metric-num" id="metricErrors">0</span>
+              <span class="metric-name">Falhas</span>
+            </div>
+            <div class="metric-box accent">
+              <span class="metric-num" id="metricPending">0</span>
+              <span class="metric-name">Restantes</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mini Real-time Log Widget -->
+        <div class="card log-card-compact">
+          <div class="card-header space-between">
+            <span class="card-title">⚡ Atividade Recente</span>
+            <button class="btn-link" id="btnGoToLogs">Ver todos</button>
+          </div>
+          <div class="mini-log-box" id="miniLogBox">
+            <p class="log-line info">[00:00:00] Servidor pronto para execução.</p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- TAB 2: Segurança Anti-Ban -->
+      <section class="tab-content" id="tab-safety">
+        
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">🛡️ Configurações de Delays (Anti-Bloqueio)</span>
+          </div>
+          <p class="card-hint">Tempos aleatórios simulando comportamento humano real.</p>
+
+          <div class="settings-grid">
+            <div class="setting-item">
+              <label>Espera Mínima (s)</label>
+              <input type="number" id="delayMinInput" class="form-input" min="20" max="300" value="45">
+            </div>
+            <div class="setting-item">
+              <label>Espera Máxima (s)</label>
+              <input type="number" id="delayMaxInput" class="form-input" min="30" max="500" value="85">
+            </div>
+            <div class="setting-item">
+              <label>Comentários p/ Lote</label>
+              <input type="number" id="batchSizeInput" class="form-input" min="1" max="50" value="5">
+            </div>
+            <div class="setting-item">
+              <label>Descanso do Lote (s)</label>
+              <input type="number" id="batchPauseInput" class="form-input" min="60" max="1200" value="180">
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">✨ Variação de Comentários</span>
+          </div>
+
+          <!-- Switch Frases -->
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <strong>Adicionar Frases Curtas Aleatórias</strong>
+              <p>Ex: "Boa sorte!", "Dedos cruzados!", "Sorteia eu!"</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="toggleFrases" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- Switch Emojis -->
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <strong>Adicionar Emojis Aleatórios</strong>
+              <p>Ex: 🍀, 🤞, ✨, 🔥, 🙌, 🎯, ⭐, 🎉</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="toggleEmojis" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- Switch Modo Visível -->
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <strong>Modo Navegador Visível no PC</strong>
+              <p>Deixe desativado para rodar em segundo plano</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="toggleVisible">
+              <span class="slider"></span>
+            </label>
+          </div>
+
+        </div>
+
+        <button class="btn-save" id="btnSaveConfig">
+          💾 Salvar Configurações
+        </button>
+
+      </section>
+
+      <!-- TAB 3: Lista de Usuários (@) -->
+      <section class="tab-content" id="tab-users">
+        
+        <div class="card">
+          <div class="card-header space-between">
+            <span class="card-title">👥 Lista de Amigos (@)</span>
+            <span class="badge-count" id="usersCountBadge">0 amigos</span>
+          </div>
+          <p class="card-hint">Cole ou edite os nomes de usuário (@) abaixo. Um por linha ou separados por espaço:</p>
+
+          <textarea id="usersTextArea" class="users-editor" rows="12" placeholder="@amigo1&#10;@amigo2&#10;@amigo3..."></textarea>
+
+          <div class="editor-actions">
+            <button class="btn-secondary" id="btnClearUsers">🗑️ Limpar</button>
+            <button class="btn-primary" id="btnSaveUsers">💾 Salvar Lista</button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- TAB 4: Logs Completos -->
+      <section class="tab-content" id="tab-logs">
+        
+        <div class="card log-card-full">
+          <div class="card-header space-between">
+            <span class="card-title">📜 Console de Logs em Tempo Real</span>
+            <button class="btn-icon-only" id="btnClearLogs" title="Limpar visualização">🧹</button>
+          </div>
+
+          <div class="terminal-logs" id="fullLogBox">
+            <!-- Linhas de log inseridas dinamicamente -->
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="appToast"></div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

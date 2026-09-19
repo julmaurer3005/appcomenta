@@ -1,0 +1,36 @@
+===============================================================
+    🤖 GUIA RÁPIDO: COMO USAR O BOT DE SORTEIOS DO INSTAGRAM
+===============================================================
+
+Este aplicativo foi desenvolvido para ser super simples e fácil de usar,
+sem necessidade de conhecimentos técnicos ou de programação.
+
+---------------------------------------------------------------
+PASSO A PASSO PARA USAR:
+---------------------------------------------------------------
+
+1. ABRIR O APLICATIVO:
+   - Dê 2 cliques no arquivo "INICIAR_BOT.bat".
+   - A tela do aplicativo se abrirá automaticamente.
+
+2. CONFIGURAR O SORTEIO:
+   - Link do Post: Cole o link da publicação do sorteio do Instagram.
+   - Lista de Usuários: Clique em "📁 Escolher..." para selecionar o arquivo .txt com os nomes dos amigos (ou mantenha o padrão "usuarios.txt").
+   - Amigos por Comentário: Escolha quantos amigos marcar em cada comentário (ex: 1, 2 ou 3).
+
+3. INICIAR:
+   - Clique no botão verde "▶ INICIAR BOT".
+   - Uma janela do navegador Chromium se abrirá na tela.
+   - Se for a primeira vez, faça o login na sua conta do Instagram no navegador aberto e confirme na mensagem que aparecer.
+   - Depois de logado, o bot cuidará de tudo sozinho!
+
+4. ACOMPANHAMENTO:
+   - Você pode acompanhar a barra de progresso, a quantidade de comentários enviados, os comentários pendentes e o log de atividades em tempo real.
+   - Para pausar a qualquer momento, basta clicar no botão vermelho "⏹ PARAR".
+
+---------------------------------------------------------------
+🛡️ DICAS DE SEGURANÇA (ANTI-BLOQUEIO):
+---------------------------------------------------------------
+- O bot já vem configurado com pausas automáticas (entre 45s e 85s entre cada comentário) e um descanso de 3 minutos a cada 5 comentários.
+- Deixe o bot trabalhar no ritmo dele para proteger a sua conta do Instagram contra bloqueios temporários.
+===============================================================

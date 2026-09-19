@@ -1,0 +1,24 @@
+# Sessão e credenciais do Instagram (Privacidade e Segurança)
+.sessao_instagram/
+*.session
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.env
+venv/
+.venv/
+
+# Node.js e Capacitor
+app_android/node_modules/
+app_android/android/
+node_modules/
+
+# Logs e screenshots de erro
+*.log
+erro_*.png
+
+# VS Code / IDE
+.vscode/
+.idea/
